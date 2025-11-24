@@ -6,9 +6,12 @@ echo *    https://github.com/openssl/openssl                         *
 echo *****************************************************************
 echo:
 
+set GIT_BIN=D:\msys64\usr\bin
+set PATH=%PATH%;%GIT_BIN%
+
 set SRC_DIR=%cd%\openssl-src\
-@REM if exist %SRC_DIR% rmdir %SRC_DIR% /q /s
-@REM git clone --recursive --depth 1 --single-branch --branch openssl-3.6.0 https://github.com/openssl/openssl.git %SRC_DIR%
+if exist %SRC_DIR% rmdir %SRC_DIR% /q /s
+git clone --recursive --depth 1 --single-branch --branch openssl-3.6.0 https://github.com/openssl/openssl.git %SRC_DIR%
 
 set PATH=%PATH%;"C:\Program Files\NASM"
 set PATH=%PATH%;"C:\Strawberry\perl\bin"
