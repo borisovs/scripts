@@ -6,6 +6,9 @@ echo *    https://github.com/cyrusimap/cyrus-sasl                    *
 echo *****************************************************************
 echo:
 
+set PlatformToolset=v143
+set WindowsTargetPlatformVersion=10.0.26100.0
+
 set GIT_BIN=D:\msys64\usr\bin
 set PATH=%PATH%;%GIT_BIN%
 
@@ -24,12 +27,12 @@ set OPENSSL_LIBPATH=%OPENSSL_DIR%\lib
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replace '\(AdditionalIncludeDirectories\)', '(AdditionalIncludeDirectories);%OPENSSL_DIR%\include' | Set-Content -Path '%SRC_DIR%\win32\openssl.props'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replace '\(AdditionalLibraryDirectories\)', '(AdditionalLibraryDirectories);%OPENSSL_DIR%\lib' | Set-Content -Path '%SRC_DIR%\win32\openssl.props'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replace 'libeay32', 'libcrypto' | Set-Content -Path '%SRC_DIR%\win32\openssl.props'"
-powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'C:\\msvc\\krb', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
+
+powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'KRB5_DIR', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
+powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'KRB5_LIB_DIR', '%KRB5_DIR%\lib' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
+
+
 
 cd %SRC_DIR%\win32
-@REM msbuild cyrus-sasl-common.sln /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0.26100.0  /p:Configuration=Release
-
-msbuild cyrus-sasl-core.sln /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0.26100.0 /p:Configuration=Release
-@REM msbuild sasl2.vcxproj /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0.26100.0
-@REM msbuild cyrus-sasl-all-in-one.sln /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0.26100.0
+msbuild cyrus-sasl-all-in-one.sln /p:PlatformToolset=%PlatformToolset% /p:WindowsTargetPlatformVersion=%WindowsTargetPlatformVersion%
 cd ../..
