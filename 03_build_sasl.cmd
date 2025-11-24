@@ -24,7 +24,7 @@ set OPENSSL_LIBPATH=%OPENSSL_DIR%\lib
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replace '\(AdditionalIncludeDirectories\)', '(AdditionalIncludeDirectories);%OPENSSL_DIR%\include' | Set-Content -Path '%SRC_DIR%\win32\openssl.props'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replace '\(AdditionalLibraryDirectories\)', '(AdditionalLibraryDirectories);%OPENSSL_DIR%\lib' | Set-Content -Path '%SRC_DIR%\win32\openssl.props'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replace 'libeay32', 'libcrypto' | Set-Content -Path '%SRC_DIR%\win32\openssl.props'"
-powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace '<Krb5Dir>C:\msvc\krb</Krb5Dir>', '<Krb5Dir>%KRB5_DIR%</Krb5Dir>' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
+powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'C:\\msvc\\krb', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
 
 cd %SRC_DIR%\win32
 @REM msbuild cyrus-sasl-common.sln /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0.26100.0  /p:Configuration=Release
