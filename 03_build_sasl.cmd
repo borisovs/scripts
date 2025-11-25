@@ -2,7 +2,7 @@
 echo:
 echo *****************************************************************
 echo *    Build the cyrus-sasl library                               *
-echo *    https://github.com/cyrusimap/cyrus-sasl                    *
+echo *    https://github.com/borisovs/cyrus-sasl.git                 *
 echo *****************************************************************
 echo:
 
