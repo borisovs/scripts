@@ -8,6 +8,7 @@ echo:
 
 set PlatformToolset=v143
 set WindowsTargetPlatformVersion=10.0.26100.0
+set Configuration=Release
 
 set GIT_BIN=D:\msys64\usr\bin
 set PATH=%PATH%;%GIT_BIN%
@@ -34,5 +35,5 @@ powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -rep
 
 
 cd %SRC_DIR%\win32
-msbuild cyrus-sasl-all-in-one.sln /p:PlatformToolset=%PlatformToolset% /p:WindowsTargetPlatformVersion=%WindowsTargetPlatformVersion%
-cd ../..
+msbuild cyrus-sasl-all-in-one.sln /p:PlatformToolset=%PlatformToolset% /p:WindowsTargetPlatformVersion=%WindowsTargetPlatformVersion% /p:Configuration=%Configuration%
+cd ..\..

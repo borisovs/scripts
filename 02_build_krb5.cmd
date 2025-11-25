@@ -33,4 +33,4 @@ nmake NODEBUG=1
 nmake install NODEBUG=1
 @rem cd windows\installer\wix
 @rem nmake [NODEBUG=1]
-cd ..
+cd ..\..
