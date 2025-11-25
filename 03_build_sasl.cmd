@@ -31,6 +31,7 @@ powershell -command "(Get-Content -Path '%SRC_DIR%\win32\openssl.props') -replac
 
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'KRB5_DIR', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'KRB5_LIB_DIR', '%KRB5_DIR%\lib' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
+powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'SASL_DIR', '%SASL_DIR%' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
 
 
 
