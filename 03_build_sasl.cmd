@@ -18,7 +18,7 @@ if exist %SRC_DIR% rmdir %SRC_DIR% /q /s
 git clone --recursive --depth 1 --single-branch --branch cyrus-sasl-2.1.28 https://github.com/borisovs/cyrus-sasl.git %SRC_DIR%
 
 set KRB5_DIR=%cd%\krb5
-set KRB5_LIBS=comerr64.lib;gssapi64.lib;k5sprt64.lib;krb5_64.lib;leashw64.lib;xpprof64.lib;
+set KRB5_LIBS=comerr64.lib;gssapi64.lib;k5sprt64.lib;krb5_64.lib;leashw64.lib;xpprof64.lib
 
 set SASL_DIR=%cd%\cyrus-sasl\
 if exist %SASL_DIR% rmdir %SASL_DIR% /q /s
@@ -37,8 +37,9 @@ powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -rep
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props') -replace 'SASL_DIR', '%SASL_DIR%' | Set-Content -Path '%SRC_DIR%\win32\cyrus-sasl.props'"
 
 @REM Enable static build of plugin_gssapiv2
-powershell -command "(Get-Content -Path '%SRC_DIR%\win32\plugin_gssapiv2.vcxproj') -replace 'KRB5_DIR', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\plugin_gssapiv2.vcxproj'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\include\config.h') -replace '\/\* \#define STATIC_GSSAPIV2 1 \*\/', '#define STATIC_GSSAPIV2 1' | Set-Content -Path '%SRC_DIR%\win32\include\config.h'"
+powershell -command "(Get-Content -Path '%SRC_DIR%\win32\plugin_gssapiv2.vcxproj') -replace 'DynamicLibrary', 'StaticLibrary' | Set-Content -Path '%SRC_DIR%\win32\plugin_gssapiv2.vcxproj'"
+powershell -command "(Get-Content -Path '%SRC_DIR%\win32\plugin_gssapiv2.vcxproj') -replace 'KRB5_DIR', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\plugin_gssapiv2.vcxproj'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\sasl2.vcxproj') -replace 'KRB5_DIR', '%KRB5_DIR%' | Set-Content -Path '%SRC_DIR%\win32\sasl2.vcxproj'"
 powershell -command "(Get-Content -Path '%SRC_DIR%\win32\sasl2.vcxproj') -replace 'KRB5_LIBS', '%KRB5_LIBS%' | Set-Content -Path '%SRC_DIR%\win32\sasl2.vcxproj'"
 
